@@ -3,11 +3,14 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define AMOUNT_NUMBERS 100
+#define MAX_SIZE 900
+
 int menu(int state)
 {
+    int input, ch;
     while (1 == 1)
     {
-        int input, ch;
         printf("# ");
         scanf("%d", &input);
         if (input < -1 || input > 4)
@@ -31,7 +34,7 @@ int menu(int state)
 
 int print_values(int *values)
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < AMOUNT_NUMBERS; i++)
     {
         if (i % 10 == 9)
         {
@@ -47,10 +50,9 @@ int print_values(int *values)
 int generate(int *values)
 {
     int r;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < AMOUNT_NUMBERS; i++)
     {
-        r = rand() * 900 / RAND_MAX;
-        values[i] = r;
+        values[i] = rand() * (MAX_SIZE + 1) / RAND_MAX;
     }
     print_values(values);
 }
@@ -62,7 +64,7 @@ int sort(int *values)
     while (sorted == 0)
     {
         sorted = 1;
-        for (int i = 0; i < 99; i++)
+        for (int i = 0; i < AMOUNT_NUMBERS - 1; i++)
         {
             if (values[i] > values[i + 1])
             {
@@ -81,9 +83,9 @@ int avgs(int *values)
 {
     int sum = 0;
     int max = 0;
-    int min = 900;
+    int min = MAX_SIZE;
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < AMOUNT_NUMBERS; i++)
     {
         sum = +values[i];
 
@@ -97,7 +99,7 @@ int avgs(int *values)
             min = values[i];
         }
     }
-    float average = sum / 100.0;
+    float average = sum / (float)AMOUNT_NUMBERS;
     int median = (values[49] + values[50]) / 2;
 
     printf("Min = %d, Max = %d\nAverage = %.2f, Median = %d\n", min, max, average, median);
@@ -106,19 +108,15 @@ int avgs(int *values)
 int search(int *values)
 {
     int depth = 1;
-    int pos = 50; // Starting in middle
+    int pos = 0;
     printf("Number: ");
     int target;
     scanf("%d", &target);
     int col, jump;
-    while (1 == 1)
+    while (depth < log2(AMOUNT_NUMBERS))
     {
-        jump = fmax(50 / pow(2, depth), 1);
-        if (depth > 8)
-        {
-            break;
-        }
-        else if (target == values[pos])
+        jump = fmax(AMOUNT_NUMBERS / pow(2, depth), 1);
+        if (target == values[pos])
         {
             col = (pos + 1) % 10;
             if (col == 0)
@@ -140,6 +138,7 @@ int search(int *values)
         printf("depth %d, pos %d, jump %d, rn %d\n", depth, pos, jump, values[pos]);
     }
     printf("Number doesnt exist\n");
+    return 0;
 }
 
 int main()
@@ -147,7 +146,7 @@ int main()
     srand(time(NULL)); // make rand random
 
     int menu_option = -1;
-    int values[100]; // 100 will always be the length of the array
+    int values[AMOUNT_NUMBERS]; // 100 will always be the length of the array
 
     printf("1 Generate values\n2 Sort values\n3 Calculate medium, median, max and minimum number\n4 Search\n0 Quit\n");
     while (1 == 1)

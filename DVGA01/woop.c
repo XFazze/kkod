@@ -1,28 +1,27 @@
 #include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
 #include <math.h>
-
 int main()
 {
-    int m;
-    float sum = 0;
-    scanf("%d", &m);
-    float tal[m];
-    for (int i = 0; i < m; i++)
+    int input;
+    scanf("%d", &input);
+    int ans;
+    ans = floor(log2(input)) + 2;
+    if (input == 1)
     {
-        scanf("%f", &tal[i]);
-        sum += tal[i];
+        ans = 1;
     }
-
-    float avg = sum / m;
-
-    float sumsecond;
-    for (int i = 0; i < m; i++)
+    else if (input == 2)
     {
-        sumsecond += pow((tal[i] - avg), 2);
+        ans = 2;
     }
-
-    printf("%f", sqrt(sumsecond / (m - 1)));
+    printf("%d", ans);
     return 0;
 }
+// 1 : 1
+// 2 : 2
+// 3-4 : 3
+// 5-8 : 4
+// 9-16 : 5
+// 17-32 : 6
+
+// 2 4 8 16 32
