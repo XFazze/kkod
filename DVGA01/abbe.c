@@ -1,32 +1,27 @@
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
+#include <time.h>
+#include <stdlib.h>
 #include <math.h>
 
 int main()
 {
-    int max;
-    scanf("%d", &max);
-    int input[max];
-
-    for (int i = 0; i < max; i++)
+    srand(time(NULL)); // make rand random
+    int o;
+    for (int i = 0; i < 901; i++)
     {
-        scanf("%d", &input[i]);
-    }
-    for (int i = 0; i < max; i++)
-    {
-        if (i == 0)
-        {
-            printf("%4d", input[i]);
-        }
-        else if (i % 5 == 0)
-        {
-            printf("\n%4d", input[i]);
-        }
-        else
+        o = 0;
+        for (int j = 0; j < 50; j++)
         {
 
-            printf("%4d", input[i]);
+            while (1 == 1)
+            {
+                o += 1;
+                if ((float)rand() * 900 / RAND_MAX == 900)
+                {
+                    break;
+                }
+            }
         }
+        printf("\n%d - %d", i, o / 5);
     }
 }

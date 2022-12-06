@@ -1,20 +1,11 @@
 #include <stdio.h>
 #include <math.h>
+
+#define asd 5
 int main()
 {
-    int input;
-    scanf("%d", &input);
-    int ans;
-    ans = floor(log2(input)) + 2;
-    if (input == 1)
-    {
-        ans = 1;
-    }
-    else if (input == 2)
-    {
-        ans = 2;
-    }
-    printf("%d", ans);
+    int a = 10;
+    printf("%d", a / (asd + 1));
     return 0;
 }
 // 1 : 1
