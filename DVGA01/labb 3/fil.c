@@ -4,7 +4,7 @@ void read_file()
 {
     printf("read asddd");
 }
-void write_file()
+void write_one_vehicle()
 {
     printf("write asddd");
 }

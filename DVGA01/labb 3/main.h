@@ -8,6 +8,8 @@
 #define MENU_OPTION_4 4
 #define MENU_OPTION_5 5
 
+#define NAME_LENGTH 32
+
 void add_vehicle();
 void remove_vehicle();
 void sort_vehicles();

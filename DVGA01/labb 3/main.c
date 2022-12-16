@@ -1,13 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 #include "fil.h"
 #include "main.h"
 
+int is_number(char *string)
+{
+    for (int i = 0; i < strlen(string) - 1; i++)
+    {
+        if (isdigit(string[i]) == 0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
 void add_vehicle()
 {
-    printf("add ASDSA");
-    read_file();
+    // TODO add check for full register
+    struct vehicle new_vehicle;
+    printf("\nAdding a vehicle");
+    char buffer[NAME_LENGTH];
+
+    printf("\nType: ");
+    fgets(buffer, NAME_LENGTH, stdin);
+    strtok(buffer, "\n");
+    new_vehicle.type = buffer;
+
+    printf("Brand: ");
+    fgets(buffer, NAME_LENGTH, stdin);
+    strtok(buffer, "\n");
+    new_vehicle.brand = buffer;
+
+    printf("\nRegistration number: ");
+    fgets(buffer, NAME_LENGTH, stdin);
+    strtok(buffer, "\n");
+    new_vehicle.reg_num = buffer;
+
+    printf("Age: ");
+    fgets(buffer, NAME_LENGTH, stdin);
+    strtok(buffer, "\n");
+    while (!is_number(buffer))
+    {
+        fgets(buffer, NAME_LENGTH, stdin);
+    }
+    new_vehicle.age = atoi(buffer);
+
+    printf("\nNew vehicle %s, %s, %s, %d", new_vehicle.type, new_vehicle.brand, new_vehicle.reg_num, new_vehicle.age);
+
+    write_one_vehicle(new_vehicle);
 }
 void remove_vehicle()
 {
