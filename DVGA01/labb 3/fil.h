@@ -1,11 +1,12 @@
 #ifndef FIL_H
 #define FIL_H
 
-struct Vehicle *read_file();
+void read_file();
 void write_one_vehicle();
 void file_exists();
 void clear_file();
-
+void write_one_person();
+int get_person_age();
 struct Person
 {
     char *name;
@@ -18,6 +19,7 @@ struct Vehicle
     char *brand;
     char *reg_num;
     int age;
+    char *owner_name;
 };
 
 #endif

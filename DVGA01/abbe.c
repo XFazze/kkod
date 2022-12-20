@@ -16,11 +16,23 @@ int is_number(char *string)
 }
 int main()
 {
-    char a = 'a';
-    printf("\naaaa%d", isdigit(a));
-    char b = '1';
-    printf("\naaaa%d", isdigit(b));
+    // char a = 'a';
+    // printf("\naaaa%d", isdigit(a));
+    // char b = '1';
+    // printf("\naaaa%d", isdigit(b));
 
-    char o[] = "12";
-    printf("\nasd%d", is_number(o));
+    // char o[] = "12";
+    // printf("\nasd%d", is_number(o));
+    if (strcmp("ac", "ab") > 0)
+    {
+        printf("Large\n");
+    }
+    else if (strcmp("a", "b") < 0)
+    {
+        printf("Snmaller\n");
+    }
+    else
+    {
+        printf("Equal\n");
+    }
 }
