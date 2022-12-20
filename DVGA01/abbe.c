@@ -1,27 +1,26 @@
 #include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-#include <math.h>
-
+#include <string.h>
+#include <ctype.h>
+int is_number(char *string)
+{
+    for (int i = 0; i < strlen(string) - 1; i++)
+    {
+        printf("\n(%c)== %d", string[i], isdigit(string[i]));
+        if (isdigit(string[i]) == 0)
+        {
+            return 0;
+        }
+    }
+    printf("return 1");
+    return 1;
+}
 int main()
 {
-    srand(time(NULL)); // make rand random
-    int o;
-    for (int i = 0; i < 901; i++)
-    {
-        o = 0;
-        for (int j = 0; j < 50; j++)
-        {
+    char a = 'a';
+    printf("\naaaa%d", isdigit(a));
+    char b = '1';
+    printf("\naaaa%d", isdigit(b));
 
-            while (1 == 1)
-            {
-                o += 1;
-                if ((float)rand() * 900 / RAND_MAX == 900)
-                {
-                    break;
-                }
-            }
-        }
-        printf("\n%d - %d", i, o / 5);
-    }
+    char o[] = "12";
+    printf("\nasd%d", is_number(o));
 }

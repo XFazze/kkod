@@ -1,16 +1,18 @@
 #ifndef FIL_H
 #define FIL_H
 
-void read_file();
+struct Vehicle *read_file();
 void write_one_vehicle();
+void file_exists();
+void clear_file();
 
-struct person
+struct Person
 {
     char *name;
     int age;
 };
 
-struct vehicle
+struct Vehicle
 {
     char *type;
     char *brand;

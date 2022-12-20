@@ -5,6 +5,7 @@
         ".env": "properties",
         "stdio.h": "c",
         "stdlib.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "fil.h": "c"
     }
 }
