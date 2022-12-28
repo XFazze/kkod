@@ -9,7 +9,6 @@
 #define MENU_OPTION_5 5
 #define MENU_OPTION_6 0
 
-#define NAME_LENGTH 12
 #define MAX_CARS 10
 
 void add_vehicle();

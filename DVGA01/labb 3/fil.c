@@ -4,46 +4,55 @@
 #include "fil.h"
 #include "main.h"
 
-void read_file(struct Vehicle *vehicles)
+int read_file(struct Vehicle *vehicles)
 {
-    file_exists("vehicles.dat");
-    FILE *f = fopen("vehicles.dat", "r");
+    file_exists("vehicles.txt");
+    FILE *f = fopen("vehicles.txt", "r");
     if (!f)
     {
         printf("Error opening vehicle file");
         exit(1);
     }
 
-    struct Vehicle vehicle;
-    int i = 0;
-    while (fread(&vehicle, sizeof(struct Vehicle), 1, f))
-    {
-        // printf("\nREAD new  vehicle %s, %s, %s, %d", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age);
-        vehicles[i] = vehicle;
+    int i=0;
+    while(fscanf(f,"%s %s %s %d %s\n", vehicles[i].type, vehicles[i].brand,vehicles[i].reg_num, &vehicles[i].age, vehicles[i].owner_name)!=EOF){
         i++;
+        // printf("\nASD%d", i);
     }
+
+    // struct Vehicle vehicle;
+    // int i = 0;
+    // while (fread(&vehicle, sizeof(struct Vehicle), 1, f))
+    // {
+    //      printf("\nREAD new  vehicle %s, %s, %s, %d", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age);
+    //     // printf("%s", vehicle.type);
+    //     vehicles[i] = vehicle;
+    //     printf("__%s", vehicle.type);
+    //     i++;
+    // }
     fclose(f);
+    return i;
 }
 void write_one_vehicle(struct Vehicle vehicle)
 {
-    file_exists("vehicles.dat");
+    file_exists("vehicles.txt");
 
-    FILE *f = fopen("vehicles.dat", "a");
+    FILE *f = fopen("vehicles.txt", "a");
     if (!f)
     {
         printf("Error opening vehicle file");
         exit(1);
     }
 
-    // printf("\nWritting new  vehicle %s, %s, %s, %d", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age);
-    fwrite(&vehicle, sizeof(struct Vehicle), 1, f);
+     printf("\nWritting new  vehicle %s, %s, %s, %d", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age);
+    // fwrite(&vehicle, sizeof(struct Vehicle), 1, f);
+    fprintf(f,"%s %s %s %d %s\n", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age, vehicle.owner_name );
     fclose(f);
 }
 void file_exists(char *file_name)
 {
     FILE *f = fopen(file_name, "r");
     if (!f)
-
     {
         printf("\ncreated file");
         f = fopen(file_name, "w");
@@ -52,7 +61,7 @@ void file_exists(char *file_name)
 }
 void clear_file()
 {
-    FILE *f = fopen("vehicles.dat", "w");
+    FILE *f = fopen("vehicles.txt", "w");
     if (!f)
     {
         printf("Error opening vehicle file at clear file");

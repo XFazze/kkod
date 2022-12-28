@@ -5,7 +5,7 @@
 
 #include "fil.h"
 #include "main.h"
-// TODO
+// TODO ssasd
 // Input names are wierd
 // input names can be empty
 // error when not deleting save file
@@ -26,19 +26,19 @@ int car_amount()
 {
     int amount = 0;
     struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
-    memset(vehicles, 0, sizeof(struct Vehicle) * MAX_CARS);
+    memset(vehicles, -1, sizeof(struct Vehicle) * MAX_CARS);
     read_file(vehicles);
-    for (int i = 0; i < MAX_CARS; i++)
-    {
-        if (vehicles[i].type == NULL)
-        {
-            break;
-        }
-        else
-        {
-            amount += 1;
-        }
-    }
+    // for (int i = 0; i < MAX_CARS; i++)
+    // {
+    //     if (vehicles[i].type == -1)
+    //     {
+    //         break;
+    //     }
+    //     else
+    //     {
+    //         amount += 1;
+    //     }
+    // }
     return amount;
     free(vehicles);
 }
@@ -57,7 +57,10 @@ void int_input(char *buffer)
 
 void add_vehicle()
 {
-    if (car_amount() == MAX_CARS)
+    
+    struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
+    memset(vehicles, -1, sizeof(struct Vehicle) * MAX_CARS);
+    if (read_file(vehicles) == MAX_CARS)
     {
         printf("\nError: Maximum allowed cars(10) already added.");
         return;
@@ -70,21 +73,19 @@ void add_vehicle()
     printf("\nType: ");
     fgets(typeb, NAME_LENGTH, stdin);
     strtok(typeb, "\n");
-    new_vehicle.type = typeb;
+    strcpy(new_vehicle.type, typeb);
 
     char brandb[NAME_LENGTH];
     printf("Brand: ");
     fgets(brandb, NAME_LENGTH, stdin);
     strtok(brandb, "\n");
-    // int blen = strlen(brandb);
-    // brandb[blen - 3] = 0;
-    new_vehicle.brand = brandb;
+    strcpy(new_vehicle.brand,brandb);
 
     char regb[NAME_LENGTH];
     printf("Registration number: ");
     fgets(regb, NAME_LENGTH, stdin);
     strtok(regb, "\n");
-    new_vehicle.reg_num = regb;
+    strcpy(new_vehicle.reg_num,regb);
 
     char ab[NAME_LENGTH];
     printf("Age: ");
@@ -96,8 +97,8 @@ void add_vehicle()
     printf("Owner name: ");
     fgets(owner_nameb, NAME_LENGTH, stdin);
     strtok(owner_nameb, "\n");
-    person.name = owner_nameb;
-    new_vehicle.owner_name = owner_nameb;
+    strcpy(person.name, owner_nameb);
+    strcpy(new_vehicle.owner_name,owner_nameb);
 
     char owner_ageb[NAME_LENGTH];
     printf("Owner age: ");
@@ -105,42 +106,28 @@ void add_vehicle()
     person.age = atoi(owner_ageb);
 
     printf("\nNew vehicle   %s, %s, %s, %d %s", new_vehicle.type, new_vehicle.brand, new_vehicle.reg_num, new_vehicle.age, new_vehicle.owner_name);
-    struct Vehicle v = {new_vehicle.type, new_vehicle.brand, new_vehicle.reg_num, new_vehicle.age + 1, new_vehicle.owner_name};
-    struct Person p = {"aaa", 123};
-    write_one_vehicle(v);
-    write_one_person(p);
-    char *a = "ff";
-    struct Vehicle vf = {a, "ffff", "ffff", 3, "aaa"};
-    if (a == "ff\0")
-    {
-        printf("\n\end of line");
-    }
-    else if (a == "ff")
-    {
 
-        printf("\n\n no end of line");
-    }
-    write_one_vehicle(vf);
     write_one_person(person);
     write_one_vehicle(new_vehicle);
 }
 
 void remove_vehicle()
 {
-    printf("\nRemove vehicle(1-%d): ", car_amount());
+    struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
+    memset(vehicles, 0, sizeof(struct Vehicle) * MAX_CARS);
+    int amount= read_file(vehicles);
+    printf("\nRemove vehicle(1-%d): ", amount);
     char buffer[NAME_LENGTH];
     int_input(buffer);
     int vehicle_num = atoi(buffer);
-    if (vehicle_num < 0 || vehicle_num > car_amount())
+    if (vehicle_num < 0 || vehicle_num > amount)
     {
         printf("Error: vehicle %d doesnt exist", vehicle_num);
     }
     else
     {
-        struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
-        memset(vehicles, 0, sizeof(struct Vehicle) * MAX_CARS);
-        read_file(vehicles);
-        int new_amount = car_amount() - 1;
+        
+        int new_amount = amount - 1;
         clear_file();
         for (int i = 0; i < new_amount; i++)
         {
@@ -161,29 +148,26 @@ void sort_vehicles()
 {
     struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
     memset(vehicles, 0, sizeof(struct Vehicle) * MAX_CARS);
-    read_file(vehicles);
+    int amount =read_file(vehicles);
     clear_file();
     int best_choice = 0;
-    int taken[MAX_CARS];
+    int taken[amount];
     while (1)
     {
-        for (int i = 0; i < MAX_CARS; i++)
+        for (int i = 0; i < amount; i++)
         {
-            if (vehicles[i].brand == NULL)
-            {
-                continue;
-            }
-            else if (strcmp(vehicles[i].brand, vehicles[best_choice].brand) < 0)
+            if (strcmp(vehicles[i].brand, vehicles[best_choice].brand) < 0 && taken[i] != 1)
             {
                 best_choice = i;
             }
         }
         write_one_vehicle(vehicles[best_choice]);
-        vehicles[best_choice].brand = NULL;
+        taken[best_choice] = 1;
+        // vehicles[best_choice].brand = "NULL";
         best_choice = -1;
-        for (int o = 0; o < MAX_CARS; o++)
+        for (int o = 0; o < amount; o++)
         {
-            if (vehicles[o].brand != NULL)
+            if (taken[o] != 1)
             {
                 best_choice = o;
             }
@@ -198,19 +182,20 @@ void sort_vehicles()
 
 void info_vehicle()
 {
-    printf("\nInfo about vehicle(1-%d): ", car_amount());
+    struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
+    memset(vehicles, 0, sizeof(struct Vehicle) * MAX_CARS);
+    int amount = read_file(vehicles);
+    printf("\nInfo about vehicle(1-%d): ", amount);
     char buffer[NAME_LENGTH];
     int_input(buffer);
     int vehicle_num = atoi(buffer);
-    if (vehicle_num < 0 || vehicle_num > car_amount())
+    if (vehicle_num < 0 || vehicle_num > amount)
     {
         printf("\nError: vehicle %d doesnt exist", vehicle_num);
     }
     else
     {
-        struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
-        memset(vehicles, 0, sizeof(struct Vehicle) * MAX_CARS);
-        read_file(vehicles);
+        
         struct Person person;
         int age = get_person_age(vehicles[vehicle_num - 1].owner_name);
         printf("Vehicle %d\nType:%s \nBrand:%s \nReg num:%s \nAge:%d \nOwner:%s \nOwner age:%d",
@@ -223,9 +208,9 @@ void show_vehicles()
 {
     struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
     memset(vehicles, 0, sizeof(struct Vehicle) * MAX_CARS);
-    read_file(vehicles);
+    int amount = read_file(vehicles);
     printf(" # %15s %15s %15s %5s", "type", "brand", "reg", "age");
-    for (int i = 0; i < MAX_CARS; i++)
+    for (int i = 0; i < amount; i++)
     {
         if (vehicles[i].type == NULL)
         {
@@ -241,14 +226,14 @@ int main()
     char buffer[MENU_OPTION_LENGTH];
     int option;
 
-    struct Vehicle v = {"aaa", "abaa", "aaa", 1, "aaa"};
-    struct Vehicle v2 = {"bbbb", "abbbb", "bbbb", 2, "aaa"};
-    struct Vehicle v3 = {"cccc", "acccc", "cccc", 3, "aaa"};
-    struct Person p = {"aaa", 3};
-    write_one_person(p);
-    write_one_vehicle(v2);
-    write_one_vehicle(v);
-    write_one_vehicle(v3);
+    // struct Vehicle v = {"aaa", "abaa", "aaa", 1, "aaa"};
+    // struct Vehicle v2 = {"bbbb", "abbbb", "bbbb", 2, "aaa"};
+    // struct Vehicle v3 = {"cccc", "acccc", "cccc", 3, "aaa"};
+    // struct Person p = {"aaa", 3};
+    // write_one_person(p);
+    // write_one_vehicle(v2);
+    // write_one_vehicle(v);
+    // write_one_vehicle(v3);
     while (1)
     {
         // menu
