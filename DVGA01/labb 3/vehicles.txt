@@ -1,4 +1,0 @@
-e r 2 0 
-r qwe qwe 0 
-qwe 2 qwe 0 
-rrrr rrr rrr 4 rrr

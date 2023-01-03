@@ -5,10 +5,6 @@
 
 #include "fil.h"
 #include "main.h"
-// TODO ssasd
-// Input names are wierd
-// input names can be empty
-// error when not deleting save file
 
 int is_number(char *string)
 {
@@ -22,26 +18,7 @@ int is_number(char *string)
     return 1;
 }
 
-int car_amount()
-{
-    int amount = 0;
-    struct Vehicle *vehicles = malloc(sizeof(struct Vehicle) * MAX_CARS);
-    memset(vehicles, -1, sizeof(struct Vehicle) * MAX_CARS);
-    read_file(vehicles);
-    // for (int i = 0; i < MAX_CARS; i++)
-    // {
-    //     if (vehicles[i].type == -1)
-    //     {
-    //         break;
-    //     }
-    //     else
-    //     {
-    //         amount += 1;
-    //     }
-    // }
-    return amount;
-    free(vehicles);
-}
+
 
 void int_input(char *buffer)
 {
@@ -226,14 +203,6 @@ int main()
     char buffer[MENU_OPTION_LENGTH];
     int option;
 
-    // struct Vehicle v = {"aaa", "abaa", "aaa", 1, "aaa"};
-    // struct Vehicle v2 = {"bbbb", "abbbb", "bbbb", 2, "aaa"};
-    // struct Vehicle v3 = {"cccc", "acccc", "cccc", 3, "aaa"};
-    // struct Person p = {"aaa", 3};
-    // write_one_person(p);
-    // write_one_vehicle(v2);
-    // write_one_vehicle(v);
-    // write_one_vehicle(v3);
     while (1)
     {
         // menu

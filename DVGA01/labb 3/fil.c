@@ -17,19 +17,7 @@ int read_file(struct Vehicle *vehicles)
     int i=0;
     while(fscanf(f,"%s %s %s %d %s\n", vehicles[i].type, vehicles[i].brand,vehicles[i].reg_num, &vehicles[i].age, vehicles[i].owner_name)!=EOF){
         i++;
-        // printf("\nASD%d", i);
     }
-
-    // struct Vehicle vehicle;
-    // int i = 0;
-    // while (fread(&vehicle, sizeof(struct Vehicle), 1, f))
-    // {
-    //      printf("\nREAD new  vehicle %s, %s, %s, %d", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age);
-    //     // printf("%s", vehicle.type);
-    //     vehicles[i] = vehicle;
-    //     printf("__%s", vehicle.type);
-    //     i++;
-    // }
     fclose(f);
     return i;
 }
@@ -45,7 +33,6 @@ void write_one_vehicle(struct Vehicle vehicle)
     }
 
      printf("\nWritting new  vehicle %s, %s, %s, %d", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age);
-    // fwrite(&vehicle, sizeof(struct Vehicle), 1, f);
     fprintf(f,"%s %s %s %d %s\n", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age, vehicle.owner_name );
     fclose(f);
 }
@@ -81,7 +68,6 @@ void write_one_person(struct Person person)
         exit(1);
     }
 
-    // printf("\nWritting new  vehicle %s, %s, %s, %d", vehicle.type, vehicle.brand, vehicle.reg_num, vehicle.age);
     fwrite(&person, sizeof(struct Person), 1, f);
     fclose(f);
 }
