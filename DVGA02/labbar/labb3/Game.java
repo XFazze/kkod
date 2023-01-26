@@ -1,52 +1,32 @@
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.*;
 
 public class Game {
-	private int tickcount = 0;
-
 	public Game(GameBoard board) {
+
 	}
 
-	private RedBox redbox = new RedBox(20, 20, 20, 20);
-	private GreenBox greenbox = new GreenBox(40, 20, 20, 20);
-	private BlueBox bluebox = new BlueBox(40, 60, 20, 20);
-	private List<RedBox> redboxes = new ArrayList<RedBox>();
-	private List<GreenBox> greenboxes = new ArrayList<GreenBox>();
-	private List<BlueBox> blueboxes = new ArrayList<BlueBox>();
-	private SquareCollection squareCollection = new SquareCollection();
-
-	private Ball ball = new Ball(50, 50, 20, 20);
+	public Boll boll = new Boll(150, 350, 40, 5);
+	public Slagtra slagtra = new Slagtra(150, 100, 20, 8);
+	public Boxar boxar = new Boxar(80, 400);
+	public int tt = 0;
 
 	public void update(Keyboard keyboard) {
-		tickcount += 1;
-		this.redbox.setX(this.redbox.getX() + 1);
-		this.squareCollection.setY(this.squareCollection.getY() + 1);
-		if (this.squareCollection.getY() == 580) {
-			System.exit(0);
-		}
-		this.ball.move(keyboard);
+		boll.update(keyboard);
+		slagtra.update(keyboard);
 
-		if (tickcount % 40 == 0) {
-			System.out.println("SECONDDDD");
-			this.greenboxes.add(new GreenBox(40 * tickcount / 40, 20, 20, 20));
+		boll.collision_sprite(slagtra);
+		for (Box box : boxar.get_levande_boxar()) {
+			if (boll.collision_sprite(box)) {
+				box.hit();
+			}
 
 		}
-		// for (int i = 0; i < this.greenboxes.size(); i++) {
-		// GreenBox greenbox = this.greenboxes.get(i);
-		// greenbox.setX(greenbox.getX() + 1);
-		// greenbox.setY(greenbox.getY() + 1);
-		// }
 
 	}
 
 	public void draw(Graphics2D graphics) {
-		this.squareCollection.draw(graphics);
-		this.redbox.draw(graphics);
-		this.ball.draw(graphics);
-		for (GreenBox greenBox : greenboxes) {
-			greenBox.draw(graphics);
-
-		}
+		slagtra.draw(graphics);
+		boxar.draw(graphics);
+		boll.draw(graphics);
 	}
 }

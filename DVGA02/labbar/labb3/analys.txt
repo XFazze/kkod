@@ -1,0 +1,28 @@
+Brickor:
+    Funktion rita.
+    Funktion placera brickor.
+    Funktion kollision.
+
+    Lista av aktiva brickor.
+    Lista av döda brickor.
+
+Bricka:
+    Int hp(färg).
+    Int x.
+    Int y.
+    Funktion rita.
+
+
+Boll:
+    Funktion rita.
+    Funktion studsa.
+
+
+Slagtra:
+    Funktion rita.
+    Funktion flytta.
+    Funktion kollision.
+
+
+Kollision:
+    Funktion kollision.

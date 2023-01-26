@@ -3,7 +3,6 @@ import java.util.*;
 
 public class SquareCollection {
     private List<RedBox> redboxes = new ArrayList<RedBox>();
-    private int x, y;
 
     public int getX() {
         return this.redboxes.get(0).getX();

@@ -1,14 +1,11 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
+
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import javax.swing.*;
 
 public class Program extends JFrame {
 	GameBoard board;
+
 	public Program() {
 		board = new GameBoard();
 		add(board);
@@ -18,7 +15,7 @@ public class Program extends JFrame {
 		setVisible(true);
 		board.start();
 	}
-	
+
 	@Override
 	protected void processKeyEvent(KeyEvent e) {
 		super.processKeyEvent(e);
