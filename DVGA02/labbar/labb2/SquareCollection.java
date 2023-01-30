@@ -27,9 +27,7 @@ public class SquareCollection {
     };
 
     SquareCollection() {
-        System.out.println("here");
         for (int i = 0; i < 10; i++) {
-            System.out.println("adding");
             this.redboxes.add(new RedBox(i * 20, 20, 20, 20));
         }
     }

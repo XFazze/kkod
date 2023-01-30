@@ -2,9 +2,10 @@ import java.awt.Graphics2D;
 import java.util.Map;
 import java.awt.Color;
 import static java.util.Map.entry;
+import java.util.Random;
 
 public class Box extends Sprite {
-    private int hp;
+    private int hp, points;
     private boolean active = false;
     Map<Integer, Color> hps = Map.ofEntries(entry(1,
             Color.blue), entry(2, Color.yellow),
@@ -17,8 +18,12 @@ public class Box extends Sprite {
             int hp,
             boolean active) {
         super(x, y, size, size);
+
         this.hp = hp;
         this.active = active;
+        
+        Random rand = new Random();
+        this.points = rand.nextInt(2)+1;
     }
 
     public void update(Keyboard keyboard) {
@@ -29,6 +34,10 @@ public class Box extends Sprite {
         graphics.fillRect(getX(), getY(), getWidth(), getHeight());
         graphics.setColor(Color.white);
         graphics.drawRect(getX(), getY(), getWidth(), getHeight());
+        if(points>1){
+        graphics.setColor(Color.white);
+            graphics.fillOval(getX()+getWidth()/4,getY()+getWidth()/4, getWidth()/2, getWidth()/2 );
+        }
 
     }
 
@@ -48,11 +57,12 @@ public class Box extends Sprite {
         return this.active;
     }
 
-    public void hit() {
-        if (hp == 0) {
-            return;
-        }
+    public int hit() {
         this.hp -= 1;
+        if (hp == 0) {
+            return points;
+        }
+        return 0;
     }
 
 }
