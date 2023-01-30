@@ -26,7 +26,7 @@ public class SquareCollection {
         }
     };
 
-    SquareCollection() {
+    public SquareCollection() {
         for (int i = 0; i < 10; i++) {
             this.redboxes.add(new RedBox(i * 20, 20, 20, 20));
         }

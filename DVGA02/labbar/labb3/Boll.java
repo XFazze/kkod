@@ -27,7 +27,7 @@ public class Boll extends Sprite {
         }
         if (getY() < 0) {
             speed_y = Math.abs(speed_y);
-        }else if(getY()+getHeight()>600){
+        }else if(getY()+getHeight()>650){
             return true;          
         }
         setX(getX() + speed_x);
@@ -72,11 +72,11 @@ public class Boll extends Sprite {
         } else if (sphere_center_y < square_top) {
             aim_y = square_top;
         }
+        boolean corner_hit = false;
         if (Math.sqrt(Math.pow((double) (aim_x - sphere_center_x), 2)
-                + Math.pow((double) (aim_y - sphere_center_y), 2)) < sphere_width) {
+                + Math.pow((double) (aim_y - sphere_center_y), 2)) < sphere_width*2/3) {
                 
             // checks corners
-            boolean corner_hit = false;
             if(sphere_center_x > square_right){
                 // right side
                 if(sphere_center_y > square_bottom){
@@ -108,42 +108,53 @@ public class Boll extends Sprite {
                     corner_hit = true;
                 }
             }
-
-            if(!corner_hit){
-               
-            int x_diff = Math.abs(sphere_center_x-square_center_x);
-            int y_diff = Math.abs(sphere_center_y-square_center_y);
-            // rectangle made square
-            int y_diff_equal = Math.abs(sphere_center_y-square_center_y)*getWidth()/getHeight();
-            
-            System.out.println("REGULAR SIDE "+y_diff+";"+x_diff+";"+y_diff_equal);
-            if(y_diff_equal>x_diff){
-
-                if(sphere_center_x>square_center_x){
+             if(!corner_hit){
+                if(sphere_center_x > square_right){
                     speed_x = Math.abs(speed_x);
-                    System.out.println("REGULAR SIDE RIGHT");
-                }else if(sphere_center_x<square_center_x){
-                    System.out.println("REGULAR SIDE LEFT");
+                }else if(sphere_center_x<square_left){
                     speed_x = -Math.abs(speed_x);
-                }
-            }else{
-                if(sphere_center_y>square_center_y){
-                    System.out.println("REGULAR SIDE BOTTOM");
+                }else if(sphere_center_y > square_bottom){
                     speed_y = Math.abs(speed_y);
-                }else if(sphere_center_y<square_center_y){
-                    System.out.println("REGULAR SIDE TOP");
+                }else if(sphere_center_y < square_top){
                     speed_y = -Math.abs(speed_y);
                 }
-            } 
             }
-            
             setX(getX()+speed_x);
             setY(getY()+speed_y);
             return true;
-        } else {
-            // System.out.println("no collisoin");
-            return false;
-        }
+                }
+              
+        return false;
+    
+
+    }
+
+}
+
+            // int x_diff = Math.abs(sphere_center_x-square_center_x);
+            // int y_diff = Math.abs(sphere_center_y-square_center_y);
+            // rectangle made square
+            // int y_diff_equal = Math.abs(sphere_center_y-square_center_y)*getWidth()/getHeight();
+            
+            // System.out.println("REGULAR SIDE "+y_diff+";"+x_diff+";"+y_diff_equal);
+            // if(y_diff_equal>x_diff){
+
+            //     if(sphere_center_x>square_center_x){
+            //         speed_x = Math.abs(speed_x);
+            //         System.out.println("REGULAR SIDE RIGHT");
+            //     }else if(sphere_center_x<square_center_x){
+            //         System.out.println("REGULAR SIDE LEFT");
+            //         speed_x = -Math.abs(speed_x);
+            //     }
+            // }else{
+            //     if(sphere_center_y>square_center_y){
+            //         System.out.println("REGULAR SIDE BOTTOM");
+            //         speed_y = Math.abs(speed_y);
+            //     }else if(sphere_center_y<square_center_y){
+            //         System.out.println("REGULAR SIDE TOP");
+            //         speed_y = -Math.abs(speed_y);
+            //     }
+            // } 
 
         // System.out.println("CORNER deltas x:" + x_delta + " y:" + y_delta);
 
@@ -170,7 +181,3 @@ public class Boll extends Sprite {
         // } catch (InterruptedException e) {
         // System.out.println("got interrupted!");
         // }
-
-    }
-
-}

@@ -19,10 +19,10 @@ public class Box extends Sprite {
             boolean active) {
         super(x, y, size, size);
 
-        this.hp = hp;
+        Random rand = new Random();
+        this.hp = rand.nextInt(3)+1;
         this.active = active;
         
-        Random rand = new Random();
         this.points = rand.nextInt(2)+1;
     }
 
