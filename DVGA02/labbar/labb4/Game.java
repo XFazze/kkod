@@ -43,6 +43,9 @@ public class Game {
 
 		}
 		if (paused) {
+			if (keyboard.isKeyDown(Key.Space)) {
+				setupBoard();
+			}
 			return;
 		}
 		if (!started) {
@@ -86,7 +89,8 @@ public class Game {
 		if (paused) {
 			graphics.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 			graphics.drawString("Game over. Points:" + points, 50, 250);
-			graphics.drawString("Enter initials in the box to the right", 50, 300);
+			graphics.drawString("Enter initials to the right if highscore", 50, 300);
+			graphics.drawString("Space to restart", 50, 350);
 
 		}
 	}

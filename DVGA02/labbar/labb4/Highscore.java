@@ -53,7 +53,6 @@ public class Highscore extends JPanel {
                 textInput.setVisible(false);
                 textInputLabel.setVisible(false);
                 textInput.setFocusable(false);
-                program.board.game.setupBoard();
                 program.board.requestFocusInWindow();
             }
         });
@@ -64,15 +63,16 @@ public class Highscore extends JPanel {
 
     }
 
-    public void AddHighscore(Integer score) {
+    public boolean AddHighscore(Integer score) {
         if (this.scores.size() < numberOfHighscores || score > this.scores.get(this.scores.size() - 1).score) {
             this.textInput.setVisible(true);
             this.textInputLabel.setVisible(true);
             this.textInput.setFocusable(true);
             this.textInput.requestFocusInWindow();
             this.score = score;
+            return true;
         } else {
-            this.program.board.game.setupBoard();
+            return false;
         }
     }
 
