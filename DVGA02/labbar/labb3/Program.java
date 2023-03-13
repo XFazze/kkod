@@ -9,12 +9,9 @@ public class Program extends JFrame {
 	RecentScore recentScore;
 
 	public Program() {
-		splitPane = new JSplitPane();
 		board = new GameBoard();
-		recentScore = new RecentScore();
-		splitPane.setRightComponent(new JScrollPane(recentScore));
-		splitPane.setLeftComponent(board);
-		add(splitPane);
+
+		add(board);
 		setResizable(true);
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
