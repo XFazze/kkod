@@ -11,7 +11,7 @@ public class Game {
 
 	private int points, bollar;
 	boolean paused, started;
-	private final int orginal_speed = 15,
+	private final int orginal_speed = 5,
 			start_x = 150,
 			start_y = 350,
 			ball_size = 80,

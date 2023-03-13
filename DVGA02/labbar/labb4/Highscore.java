@@ -65,7 +65,7 @@ public class Highscore extends JPanel {
     }
 
     public void AddHighscore(Integer score) {
-        if (this.scores.size() == 0 || score > this.scores.get(this.scores.size() - 1).score) {
+        if (this.scores.size() < numberOfHighscores || score > this.scores.get(this.scores.size() - 1).score) {
             this.textInput.setVisible(true);
             this.textInputLabel.setVisible(true);
             this.textInput.setFocusable(true);
