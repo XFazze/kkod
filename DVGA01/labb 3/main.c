@@ -108,7 +108,7 @@ void remove_vehicle()
         clear_file();
         for (int i = 0; i < new_amount; i++)
         {
-            if (vehicle_num - 2 < i)
+            if (vehicle_num - 1 <= i)
             {
                 write_one_vehicle(vehicles[i + 1]);
             }
@@ -117,8 +117,8 @@ void remove_vehicle()
                 write_one_vehicle(vehicles[i]);
             }
         }
-        free(vehicles);
     }
+free(vehicles);
 }
 
 void sort_vehicles()
@@ -172,13 +172,12 @@ void info_vehicle()
     }
     else
     {
-        
         struct Person person;
         int age = get_person_age(vehicles[vehicle_num - 1].owner_name);
         printf("Vehicle %d\nType:%s \nBrand:%s \nReg num:%s \nAge:%d \nOwner:%s \nOwner age:%d",
                vehicle_num, vehicles[vehicle_num - 1].type, vehicles[vehicle_num - 1].brand, vehicles[vehicle_num - 1].reg_num, vehicles[vehicle_num - 1].age, vehicles[vehicle_num - 1].owner_name, age);
-        free(vehicles);
     }
+    free(vehicles);
 }
 
 void show_vehicles()
