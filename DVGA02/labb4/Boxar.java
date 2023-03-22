@@ -4,9 +4,10 @@ import java.util.*;
 public class Boxar {
     private int boxsize;
     private int air;
-    private List<List<Box>> alla_boxar = new ArrayList<>();
+    private List<List<Box>> alla_boxar;
 
-    Boxar(int size, int air) {
+    public Boxar(int size, int air) {
+        alla_boxar = new ArrayList<>();
         this.boxsize = size;
         this.air = air;
         for (int o = 0; o < (600 - air) / size; o++) {
@@ -21,10 +22,6 @@ public class Boxar {
             }
             alla_boxar.add(rad);
         }
-    }
-
-    public void update(Keyboard keyboard) {
-
     }
 
     public void draw(Graphics2D graphics) {

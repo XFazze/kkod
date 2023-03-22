@@ -65,6 +65,7 @@ public class Game {
 			}
 		}
 		slagtra.update(keyboard);
+		boll.update(keyboard);
 
 		boll.collision_sprite(slagtra);
 		for (Box box : boxar.get_levande_boxar()) {
@@ -81,9 +82,7 @@ public class Game {
 		// System.out.println("draw:"+points);
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		graphics.drawString("Points:" + points, 10, 550);
-		if (bollar < 0) {
-			bollar = 0;
-		}
+
 		graphics.drawString("Bollar:" + bollar, 10, 570);
 
 		if (paused) {

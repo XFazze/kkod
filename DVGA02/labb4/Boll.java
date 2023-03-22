@@ -4,7 +4,7 @@ import java.awt.Color;
 public class Boll extends Sprite {
     private int speed_x, speed_y;
 
-    Boll(int x, int y, int size, int speed) {
+    public Boll(int x, int y, int size, int speed) {
         super(x, y, size, size);
         this.speed_x = speed;
         this.speed_y = -speed;
@@ -19,9 +19,9 @@ public class Boll extends Sprite {
     };
 
     public void update(Keyboard keyboard) {
-
-        // Add function for collision change movment
-    };
+        setX(getX() + speed_x);
+        setY(getY() + speed_y);
+    }
 
     public boolean is_lost_ball() {
         if (getX() < 0) {
@@ -34,8 +34,6 @@ public class Boll extends Sprite {
         } else if (getY() + getHeight() > 650) {
             return true;
         }
-        setX(getX() + speed_x);
-        setY(getY() + speed_y);
         return false;
 
     }
@@ -47,8 +45,6 @@ public class Boll extends Sprite {
     }
 
     public boolean collision_sprite(Sprite box) {
-        // int square_center_x = box.getX() + box.getWidth() / 2;
-        // int square_center_y = box.getY() + box.getHeight() / 2;
         int square_right = box.getX() + box.getWidth();
         int square_left = box.getX();
         int square_top = box.getY();
@@ -56,12 +52,7 @@ public class Boll extends Sprite {
 
         int sphere_center_x = getX() + getWidth() / 2;
         int sphere_center_y = getY() + getHeight() / 2;
-        // int sphere_left = getX();
-        // int sphere_top = getY();
-        // int sphere_right = getX() + getWidth();
-        // int sphere_bottom = getY() + getHeight();
         int sphere_width = getWidth();
-        // int sphere_height = getHeight();
 
         int aim_x = sphere_center_x;
         int aim_y = sphere_center_y;
@@ -132,55 +123,3 @@ public class Boll extends Sprite {
     }
 
 }
-
-// int x_diff = Math.abs(sphere_center_x-square_center_x);
-// int y_diff = Math.abs(sphere_center_y-square_center_y);
-// rectangle made square
-// int y_diff_equal =
-// Math.abs(sphere_center_y-square_center_y)*getWidth()/getHeight();
-
-// System.out.println("REGULAR SIDE "+y_diff+";"+x_diff+";"+y_diff_equal);
-// if(y_diff_equal>x_diff){
-
-// if(sphere_center_x>square_center_x){
-// speed_x = Math.abs(speed_x);
-// System.out.println("REGULAR SIDE RIGHT");
-// }else if(sphere_center_x<square_center_x){
-// System.out.println("REGULAR SIDE LEFT");
-// speed_x = -Math.abs(speed_x);
-// }
-// }else{
-// if(sphere_center_y>square_center_y){
-// System.out.println("REGULAR SIDE BOTTOM");
-// speed_y = Math.abs(speed_y);
-// }else if(sphere_center_y<square_center_y){
-// System.out.println("REGULAR SIDE TOP");
-// speed_y = -Math.abs(speed_y);
-// }
-// }
-
-// System.out.println("CORNER deltas x:" + x_delta + " y:" + y_delta);
-
-// speed_x = -speed_x;
-// speed_y = -speed_y;
-
-// Not enough sensitivity to work
-// b*fake_n/|fake_n|^2*n
-// b*fake_n skalärprodukt
-// double circle_hypo_squared = Math.sqrt(Math.pow(y_delta, 2) +
-// Math.pow(x_delta, 2));
-// double thing1 = (speed_x * x_delta + speed_y * y_delta) /
-// Math.pow(circle_hypo_squared, 2);
-// double normV_x = thing1 * x_delta;
-// double normV_y = thing1 * y_delta;
-// speed_x += normV_x * 2;
-// speed_y += normV_y * 2;
-
-// System.out.println("CORNER IN BOUNDS normx" + normV_x + " normy" + normV_y +
-// " xdelta" + x_delta + " ydelta"
-// + y_delta);
-// try {
-// Thread.sleep(5000);
-// } catch (InterruptedException e) {
-// System.out.println("got interrupted!");
-// }

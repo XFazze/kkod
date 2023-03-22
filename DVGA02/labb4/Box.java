@@ -11,7 +11,7 @@ public class Box extends Sprite {
             Color.blue), entry(2, Color.yellow),
             entry(3, Color.red));
 
-    Box(
+    public Box(
             int x,
             int y,
             int size,
@@ -20,10 +20,10 @@ public class Box extends Sprite {
         super(x, y, size, size);
 
         Random rand = new Random();
-        this.hp = rand.nextInt(3)+1;
+        this.hp = rand.nextInt(3) + 1;
         this.active = active;
-        
-        this.points = rand.nextInt(2)+1;
+
+        this.points = rand.nextInt(2) + 1;
     }
 
     public void update(Keyboard keyboard) {
@@ -34,9 +34,9 @@ public class Box extends Sprite {
         graphics.fillRect(getX(), getY(), getWidth(), getHeight());
         graphics.setColor(Color.white);
         graphics.drawRect(getX(), getY(), getWidth(), getHeight());
-        if(points>1){
-        graphics.setColor(Color.white);
-            graphics.fillOval(getX()+getWidth()/4,getY()+getWidth()/4, getWidth()/2, getWidth()/2 );
+        if (points > 1) {
+            graphics.setColor(Color.white);
+            graphics.fillOval(getX() + getWidth() / 4, getY() + getWidth() / 4, getWidth() / 2, getWidth() / 2);
         }
 
     }
