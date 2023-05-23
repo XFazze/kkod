@@ -5,6 +5,7 @@ import static java.util.Map.entry;
 import java.util.Random;
 
 public class Box extends Sprite {
+    private static final int max_points = 2;
     private int hp, points;
     private boolean active = false;
     Map<Integer, Color> hps = Map.ofEntries(entry(1,
@@ -15,15 +16,14 @@ public class Box extends Sprite {
             int x,
             int y,
             int size,
-            int hp,
             boolean active) {
         super(x, y, size, size);
 
         Random rand = new Random();
-        this.hp = rand.nextInt(3) + 1;
+        this.hp = rand.nextInt(hps.size()) + 1;
         this.active = active;
 
-        this.points = rand.nextInt(2) + 1;
+        this.points = rand.nextInt(max_points) + 1;
     }
 
     public void update(Keyboard keyboard) {
@@ -36,6 +36,7 @@ public class Box extends Sprite {
         graphics.drawRect(getX(), getY(), getWidth(), getHeight());
         if (points > 1) {
             graphics.setColor(Color.white);
+            // 2 och 4 placerar ovalen i mitten av rektangeln
             graphics.fillOval(getX() + getWidth() / 4, getY() + getWidth() / 4, getWidth() / 2, getWidth() / 2);
         }
 

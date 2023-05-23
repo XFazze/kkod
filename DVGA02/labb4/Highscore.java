@@ -40,9 +40,6 @@ public class Highscore extends JPanel {
         textInputLabel.setForeground(Color.YELLOW);
         add(textInputLabel);
         textInput = new JTextField(3);
-        // textInput.setBounds(textInput.getX(), textInput.getY(), 10, 10);
-        // textInput.setPreferredSize(new Dimension(10, 20));
-        // textInput.setSize(new Dimension(100, 20));
         textInput.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

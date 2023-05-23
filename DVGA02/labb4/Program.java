@@ -12,8 +12,8 @@ public class Program extends JFrame {
 	public LatestRun latestRun;
 	public Highscore highscore;
 
-	private Integer latestRunsSaved = 3;
-	private Integer highscoresSaved = 10;
+	private static final Integer latestRunsSaved = 3, highscoresSaved = 10, scoreboards_width = 150,
+			scoreboards_height = 100;
 
 	public Program() {
 		latestRun = new LatestRun(latestRunsSaved);
@@ -25,7 +25,7 @@ public class Program extends JFrame {
 
 		rightComponents = new JSplitPane(JSplitPane.VERTICAL_SPLIT, latestRun, highscore);
 		rightComponents.setResizeWeight(0.5);
-		rightComponents.setPreferredSize(new Dimension(150, 100));
+		rightComponents.setPreferredSize(new Dimension(scoreboards_width, scoreboards_height));
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, board, rightComponents);
 		add(splitPane);
 		setResizable(true);

@@ -14,7 +14,7 @@ public class GameBoard extends JComponent {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(800, 600);
+		return new Dimension(Game.game_window_width, Game.game_window_height);
 	}
 
 	@Override

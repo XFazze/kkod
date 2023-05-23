@@ -11,12 +11,19 @@ public class Game {
 
 	private int points, bollar;
 	boolean paused, started;
-	private final int orginal_speed = 5,
-			start_x = 150,
-			start_y = 350,
+	public static final int game_window_height = 600,
+			game_window_width = 800;
+	private static final int orginal_speed = 5,
+			boll_start_x = 150,
+			boll_start_y = 350,
 			ball_size = 80,
 			box_size = 200,
-			box_air = 400;
+			box_air = 400,
+			slagtra_start_x = 150,
+			slagtra_start_y = game_window_height - 100,
+			slagtra_width = 200,
+			slagtra_height = 16,
+			slagtra_speed = 5;
 
 	public Game(GameBoard board, Program program) {
 		this.latestRun = program.latestRun;
@@ -26,8 +33,8 @@ public class Game {
 	}
 
 	public void setupBoard() {
-		boll = new Boll(start_x, start_y, ball_size, orginal_speed);
-		slagtra = new Slagtra(150, 100, 20, 8);
+		boll = new Boll(boll_start_x, boll_start_y, ball_size, orginal_speed);
+		slagtra = new Slagtra(slagtra_start_x, slagtra_start_y, slagtra_width, slagtra_height, slagtra_speed);
 		boxar = new Boxar(box_size, box_air);
 		points = 0;
 		bollar = 1;
@@ -58,8 +65,8 @@ public class Game {
 		if (boll.is_lost_ball()) {
 			bollar -= 1;
 			if (bollar > 0) {
-				boll.setX(start_x);
-				boll.setY(start_y);
+				boll.setX(boll_start_x);
+				boll.setY(boll_start_y);
 				boll.setSpeedX(orginal_speed);
 				boll.setSpeedY(-orginal_speed);
 			}
@@ -79,7 +86,6 @@ public class Game {
 		slagtra.draw(graphics);
 		boxar.draw(graphics);
 		boll.draw(graphics);
-		// System.out.println("draw:"+points);
 		graphics.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		graphics.drawString("Points:" + points, 10, 550);
 

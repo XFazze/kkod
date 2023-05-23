@@ -26,12 +26,12 @@ public class Boll extends Sprite {
     public boolean is_lost_ball() {
         if (getX() < 0) {
             speed_x = Math.abs(speed_x);
-        } else if (getX() + getWidth() > 800) {
+        } else if (getX() + getWidth() > Game.game_window_width) {
             speed_x = -Math.abs(speed_x);
         }
         if (getY() < 0) {
             speed_y = Math.abs(speed_y);
-        } else if (getY() + getHeight() > 650) {
+        } else if (getY() + getHeight() > Game.game_window_height) {
             return true;
         }
         return false;
