@@ -98,7 +98,6 @@ int main(int arc, char **argv)
         // printf("aaa id:%d arrival:%d burst:%d \n", processes[process_count].id, processes[process_count].arrival_time, processes[process_count].burst_time);
         process_count++;
     }
-    fclose(fp);
 
     int time = 0;
     qsort(processes, process_count, sizeof(Process), process_arrival_time_compare);
@@ -212,5 +211,6 @@ int main(int arc, char **argv)
     printf("Average waiting time: %.2f (ms)\n", (float)sum_wait_time / (float)process_count);
     printf("Average turnaround time: %.2f (ms)\n", (float)sum_turnaround_time / (float)process_count);
 
+    fclose(fp);
     return 0;
 }
