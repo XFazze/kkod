@@ -1,11 +1,11 @@
 #ifndef NODE_H
 #define NODE_H
 
-struct nodeEl {
+struct Node {
     int el;
-    struct nodeEL * next;
+    struct Node* next;
 };
 
-typedef struct nodeEL node;
+typedef struct Node node;
 
 #endif
