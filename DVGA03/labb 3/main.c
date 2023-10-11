@@ -14,7 +14,7 @@ int main()
 \t3: Lägg till ett heltal sist i listan\n\
 \t4: Lägg till ett tal på (valfri plats)\n\
 \t5: Ta bort ett givet heltal\n\
-\t7: Ta bort ett heltal (valfri plats)\n\
+\t6: Ta bort ett heltal (valfri plats)\n\
 \t7: Töm listan\n\
 \t8: Vänd på listan\n\
 \t9: Skifta listan ett schoice_bufferteg åt vänster (och lägg första heltalet sist)\n\
