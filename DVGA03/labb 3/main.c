@@ -17,7 +17,7 @@ int main()
 \t6: Ta bort ett heltal (valfri plats)\n\
 \t7: Töm listan\n\
 \t8: Vänd på listan\n\
-\t9: Skifta listan ett schoice_bufferteg åt vänster (och lägg första heltalet sist)\n\
+\t9: Skifta listan ett steg åt vänster (och lägg första heltalet sist)\n\
 \t10: Skifta listan ett steg åt höger (och lägg sista heltalet först)\n\
 \t11: Sortera listan (lägsta heltalet först)\n\
 \t12: Skriv ut startadress för listan\n\n\
@@ -28,13 +28,12 @@ Gör ditt val: \
     while (choice != 0)
     {
         printf("%s", choices);
-
         choice = getInput("Choice");
-        printf("choice%d\n", choice);
 
         switch (choice)
         {
         case 0:
+            head = DClear(head);
             break;
         case 1:
             DPrintList(head);

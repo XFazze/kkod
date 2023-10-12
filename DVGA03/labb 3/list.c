@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "list.h"
 #include "node.h"
@@ -18,19 +19,15 @@ int LSize(node *head)
 int LIsEmpty(node *head)
 {
     if (head == 0)
-    {
-        return 0;
-    }
-    else
-    {
         return 1;
-    }
+    else
+        return 0;
 }
 
 node *LGetNode(node *head, int index)
 {
     node *cnode = head;
-    for (int i = 0; i <= index; i++)
+    for (int i = 0; i < index; i++)
     {
         cnode = cnode->next;
     }
@@ -73,8 +70,16 @@ node *LInsertElement(node *head, int value, int index)
         head = new_node;
         return head;
     }
+    if (index == 0)
+    {
+        new_node->next = head;
+
+        head = new_node;
+        return head;
+    }
     node *previousNode = LGetNode(head, index - 1);
     new_node->next = previousNode->next;
+    previousNode->next = new_node;
     return head;
 }
 
@@ -113,10 +118,10 @@ node *LSort(node *head)
         {
             head = head->next;
             cnode->next = head->next;
-            head->next = head;
+            head->next = cnode;
         }
         cnode = head;
-
+        // cnode + 1 vs cnode + 2
         while (cnode->next->next != 0)
         {
             if (cnode->next->el > cnode->next->next->el)
@@ -129,7 +134,6 @@ node *LSort(node *head)
             }
             cnode = cnode->next;
         }
-
     } while (no_change == 0);
     return head;
 }
@@ -141,7 +145,6 @@ node *LGetNext(node *cnode)
 
 int LGetValue(node *cnode)
 {
-
     return cnode->el;
 }
 
