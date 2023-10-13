@@ -7,7 +7,7 @@
 #include "node.h"
 
 #define MAX_INPUT 4
-int getInput(char *prompt)
+int getInput(char* prompt)
 {
     char interger_buffer[MAX_INPUT];
     printf("%s:", prompt);
@@ -16,7 +16,7 @@ int getInput(char *prompt)
     return atoi(interger_buffer);
 }
 
-node *DInsertElementAt(node *head)
+node* DInsertElementAt(node* head)
 {
     int heltal = getInput("Heltal");
     int index = getInput("Index");
@@ -30,14 +30,14 @@ node *DInsertElementAt(node *head)
     return LInsertElement(head, heltal, index);
 }
 
-node *DInsertElement(node *head)
+node* DInsertElement(node* head)
 {
     int heltal = getInput("Heltal");
 
     return LInsertElement(head, heltal, LSize(head));
 }
 
-void DPrintList(node *head)
+void DPrintList(node* head)
 {
 
     if (LIsEmpty(head))
@@ -45,7 +45,7 @@ void DPrintList(node *head)
         printf("List is empty\n");
         return;
     }
-    node *cnode = head;
+    node* cnode = head;
     do
     {
         printf("%d ", LGetValue(cnode));
@@ -54,12 +54,12 @@ void DPrintList(node *head)
     printf("\n");
 }
 
-void DPrintListSize(node *head)
+void DPrintListSize(node* head)
 {
     printf("List size:%d\n", LSize(head));
 }
 
-node *DRemoveInteger(node *head)
+node* DRemoveInteger(node* head)
 {
     int heltal = getInput("Heltal");
 
@@ -72,7 +72,7 @@ node *DRemoveInteger(node *head)
     return LRemoveAtIndex(head, index);
 }
 
-node *DRemoveAt(node *head)
+node* DRemoveAt(node* head)
 {
     int index = getInput("Index");
 
@@ -84,14 +84,14 @@ node *DRemoveAt(node *head)
     return LRemoveAtIndex(head, index);
 }
 
-node *DClear(node *head)
+node* DClear(node* head)
 {
     while (!LIsEmpty(head))
         head = LRemoveAtIndex(head, 0);
     return head;
 }
 
-node *DReverse(node *head)
+node* DReverse(node* head)
 {
     if (LSize(head) < 1)
     {
@@ -101,25 +101,25 @@ node *DReverse(node *head)
     return LReverse(head, 0);
 }
 
-node *DShiftLeft(node *head)
+node* DShiftLeft(node* head)
 {
-    node *last_node = LGetNode(head, LSize(head) - 1);
+    node* last_node = LGetNode(head, LSize(head) - 1);
     last_node->next = head;
     head = head->next;
     last_node->next->next = 0;
     return head;
 }
 
-node *DShiftRight(node *head)
+node* DShiftRight(node* head)
 {
-    node *second_last_node = LGetNode(head, LSize(head) - 2);
+    node* second_last_node = LGetNode(head, LSize(head) - 2);
     second_last_node->next->next = head;
     head = second_last_node->next;
     second_last_node->next = 0;
     return head;
 }
 
-node *DSort(node *head)
+node* DSort(node* head)
 {
     if (LSize(head) < 2)
     {
@@ -129,7 +129,7 @@ node *DSort(node *head)
     return LSort(head);
 }
 
-void DPrintStartAdress(node *head)
+void DPrintStartAdress(node* head)
 {
     printf("Startadress: %p\n", &head);
 }

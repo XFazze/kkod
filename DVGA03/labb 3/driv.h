@@ -5,7 +5,7 @@
 // Returns an interger from standard input.
 int getInput(char *prompt);
 
-// Prompts the user for index and integer then  inserts the element in the list.
+// Prompts the user for index and integer then inserts the element in the list. Returns head.
 node *DInsertElementAt(node *head);
 
 // Prompts user for integer then appends the elemnent at the end. Returns head.

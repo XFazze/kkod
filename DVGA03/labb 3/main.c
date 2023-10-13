@@ -23,7 +23,7 @@ int main()
 \t12: Skriv ut startadress för listan\n\n\
 Gör ditt val: \
     ";
-    node *head = 0;
+    node* head = 0;
     int choice = 1;
     while (choice != 0)
     {
