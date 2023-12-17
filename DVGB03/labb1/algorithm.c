@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h> // bool
 #include "algorithm.h"
 
 //
@@ -40,7 +41,7 @@ void quick_sort_recursive(int *arr, int low, int high)
 	}
 }
 
-bool binary_search_recursive(int *arr, int n, int v, int low, int mid, int high)
+bool binary_search_recursive(const int *arr, int n, int v, int low, int mid, int high)
 {
 	if (arr[mid] == v)
 	{
@@ -110,18 +111,17 @@ void quick_sort(int *arr, int n)
 	quick_sort_recursive(arr, 0, n - 1);
 }
 
-void linear_search(int *arr, int n, int v)
+bool linear_search(const int *arr, int n, int v)
 {
 	for (int i = 0; i < n; i++)
 	{
 		if (v == arr[i])
-			return;
+			return true;
 	}
-	return;
+	return false;
 }
 
-void binary_search(int *arr, int n, int v)
+bool binary_search(const int *arr, int n, int v)
 {
-	binary_search_recursive(arr, n, v, 0, n / 2, n - 1);
-	return;
+	return binary_search_recursive(arr, n, v, 0, n / 2, n - 1);
 }

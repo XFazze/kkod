@@ -13,9 +13,9 @@ void insertion_sort(int *arr, int n);
 void quick_sort(int *arr, int n);
 
 // linear_search checks whether a value v is in an array arr of length n
-void linear_search(int *arr, int n, int v);
+bool linear_search(const int *arr, int n, int v);
 
 // binary_search checks whether a value v is in a sorted arrray arr of length n
-void binary_search(int *arr, int n, int v);
+bool binary_search(const int *arr, int n, int v);
 
 #endif

@@ -79,7 +79,7 @@ void get_array(const algorithm_t algorithm, const case_t case_, int *arr, int n)
     return;
 }
 
-void time_algoritm(result_t *buf, int *arr, void f(), const algorithm_t algorithm, const case_t case_, int result_length, int target)
+void time_algoritm(result_t *buf, int *arr, void sort_function(), bool search_function(), const algorithm_t algorithm, const case_t case_, int result_length, int target)
 {
 
     for (int iteration = 0; iteration < result_length; iteration++)
@@ -95,7 +95,7 @@ void time_algoritm(result_t *buf, int *arr, void f(), const algorithm_t algorith
             if (algorithm == binary_search_t && case_ == best_t)
                 target = size / 2;
 
-            (target != -1) ? f(arr, size, target) : f(arr, size);
+            (target != -1) ? search_function(arr, size, target) : sort_function(arr, size);
         }
         for (int i = 0; i < ITERATIONS; i++)
         {
@@ -107,7 +107,7 @@ void time_algoritm(result_t *buf, int *arr, void f(), const algorithm_t algorith
                 target = size / 2;
 
             clock_gettime(CLOCK_MONOTONIC, &start);
-            (target != -1) ? f(arr, size, target) : f(arr, size);
+            (target != -1) ? search_function(arr, size, target) : sort_function(arr, size);
             clock_gettime(CLOCK_MONOTONIC, &finish);
             get_delta_time(start, finish, &delta);
         }
@@ -124,23 +124,23 @@ void benchmark(const algorithm_t algorithm, const case_t case_, result_t *buf, i
     switch (algorithm)
     {
     case bubble_sort_t:
-        time_algoritm(buf, arr, bubble_sort, algorithm, case_, result_length, -1);
+        time_algoritm(buf, arr, bubble_sort, linear_search, algorithm, case_, result_length, -1);
         break;
 
     case insertion_sort_t:
-        time_algoritm(buf, arr, insertion_sort, algorithm, case_, result_length, -1);
+        time_algoritm(buf, arr, insertion_sort, linear_search, algorithm, case_, result_length, -1);
         break;
 
     case quick_sort_t:
-        time_algoritm(buf, arr, quick_sort, algorithm, case_, result_length, -1);
+        time_algoritm(buf, arr, quick_sort, linear_search, algorithm, case_, result_length, -1);
         break;
 
     case linear_search_t:
-        time_algoritm(buf, arr, linear_search, algorithm, case_, result_length, 0); // sus worst
+        time_algoritm(buf, arr, bubble_sort, linear_search, algorithm, case_, result_length, 0); // sus worst
         break;
 
     case binary_search_t:
-        time_algoritm(buf, arr, binary_search, algorithm, case_, result_length, SIZE_START * ITERATIONS); // not best/worst/average
+        time_algoritm(buf, arr, bubble_sort, binary_search, algorithm, case_, result_length, SIZE_START * ITERATIONS); // not best/worst/average
         break;
 
     default:

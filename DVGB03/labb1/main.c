@@ -1,5 +1,4 @@
 #include "ui.h"
-#include "graph.h"
 
 int main()
 {
