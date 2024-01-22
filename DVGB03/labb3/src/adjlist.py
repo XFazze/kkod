@@ -251,32 +251,6 @@ class AdjacencyList:
         src_node.set_edges(edge_head.add(dst, weight))
         return self
 
-        edge_duplicate = edge_head._find_return(dst)
-        if not edge_duplicate.is_empty():
-            edge_duplicate.set_weight(weight)
-        elif edge_head.is_empty():
-            edge_head.set_dst(dst)
-            edge_head.set_weight(weight)
-            edge_head.set_tail(Edge())
-
-        elif edge_head.get_dst() > dst:
-            edge = Edge(dst=dst, weight=weight)
-            edge.set_tail(edge_head)
-            src_node.set_edges(edge)
-
-        else:
-            loop_edge = edge_head
-            while not loop_edge.is_empty():
-                if loop_edge.get_tail().is_empty():
-                    loop_edge.set_tail(Edge(dst=dst, weight=weight))
-                    break
-                elif loop_edge.get_tail().get_dst() > dst:
-                    edge = Edge(dst=dst, weight=weight)
-                    edge.set_tail(loop_edge.get_tail())
-                    loop_edge.set_tail(edge)
-                    break
-                loop_edge = loop_edge.get_tail()
-
     def delete_edge(self, src, dst):
         """
         Deletes an edge from node `src` to node `dst` if it exists.
@@ -300,7 +274,6 @@ class AdjacencyList:
             return self
         else:
             self.delete_edge(self.get_name(), name)
-        # print("next", self.get_name())
         if not self.get_tail().is_empty():
             self.get_tail().delete_edges(name)
         return self
